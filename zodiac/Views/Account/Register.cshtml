@@ -7,30 +7,68 @@
 
 <h2>Register</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post))
-{
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div>
-        <label for="Username">Username:</label>
-        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .signup-container {
+            width: 300px;
+            margin: auto;
+            margin-top: 50px;
+        }
+
+            .signup-container input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+
+            .signup-container button {
+                width: 100%;
+                padding: 10px;
+                background-color: #4caf50;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form method="post" asp-action="Register">
+
+            <div>
+                <label for="FullName">Full Name:</label>
+                <input type="text" id="FullName" name="FullName" required />
+            </div>
+
+
+            <div>
+                <label for="Email">Email:</label>
+                <input type="email" id="Email" name="Email" required />
+            </div>
+
+
+            <div>
+                <label for="Password">Password:</label>
+                <input type="password" id="Password" name="Password" required />
+            </div>
+            <div>
+                <label for="ConfirmPassword">Confirm Password:</label>
+                <input type="password" id="ConfirmPassword" name="ConfirmPassword" required />
+            </div>
+            <button type="submit">Sign Up</button>
+            <p>
+                <a asp-action="Login">Already have an Account?</a>
+            </p>
+        </form>
     </div>
-    <div>
-        <label for="Email">Email:</label>
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-    </div>
-    <div>
-        <label for="Password">Password:</label>
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-    </div>
-    <div>
-        <label for="ConfirmPassword">Confirm Password:</label>
-        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-    </div>
-    <div>
-        <button type="submit">Register</button>
-    </div>
-}
+</body>
+</html>
+
