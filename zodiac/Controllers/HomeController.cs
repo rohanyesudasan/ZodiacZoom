@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using signup_login.Models;
 using System.Diagnostics;
+using zodiac.Models;
 
-namespace signup_login.Controllers
+namespace zodiac.Controllers
 {
     public class HomeController : Controller
     {

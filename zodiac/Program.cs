@@ -1,13 +1,4 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using signup_login.Areas.Identity.Data;
-using signup_login.Data;
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("signup_loginContextConnection") ?? throw new InvalidOperationException("Connection string 'signup_loginContextConnection' not found.");
-
-builder.Services.AddDbContext<signup_loginContext>(options => options.UseSqlServer(connectionString));
-
-builder.Services.AddDefaultIdentity<signup_loginUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<signup_loginContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -32,5 +23,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapRazorPages();
+
 app.Run();

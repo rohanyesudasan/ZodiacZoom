@@ -1,4 +1,4 @@
-namespace signup_login.Models
+namespace zodiac.Models
 {
     public class ErrorViewModel
     {
