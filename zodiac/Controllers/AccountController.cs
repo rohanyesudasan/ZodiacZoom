@@ -1,10 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using zodiac.Migration;
 using zodiac.Models;
 
 namespace zodiac.Controllers
 {
     public class AccountController : Controller
     {
+        private ZodiacContext _db { get; set; }
+        public AccountController(ZodiacContext zodiacContext)
+        {
+            _db = zodiacContext;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -21,12 +28,15 @@ namespace zodiac.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Perform user registration logic here
-                // For simplicity, let's just redirect to a success page
+                if(_db.Users.Any(x => x.Email ==  model.Email))
+                {
+                    ViewBag.ErrorMessage = "User with same Email already exists";
+                    return View(model);
+                }
+                _db.Add(model);
+                _db.SaveChanges();
                 return RedirectToAction("RegistrationSuccess");
             }
-
-            // If the model is not valid, return to the registration page with error messages
             return View(model);
         }
 
@@ -37,6 +47,26 @@ namespace zodiac.Controllers
         }
         public ActionResult Login()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginVM loginVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _db.Users.SingleOrDefault(x => x.Email == loginVM.Email && x.Password == loginVM.Password);
+                if (user != null)
+                {
+                    HttpContext.Session.SetInt32("UserId", user.Id);
+                    HttpContext.Session.SetString("Email", user.Email);
+                    HttpContext.Session.SetString("Username", user.Username);
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "Incorrect Email or Password";
+                }
+            }
             return View();
         }
         public ActionResult index1()

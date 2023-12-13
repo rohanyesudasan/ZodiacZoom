@@ -1,4 +1,4 @@
-﻿@model zodiac.Models.UserModel
+﻿@model zodiac.Models.LoginVM
 
 
 @{
@@ -10,7 +10,6 @@
     <title>Login</title>
     <style>
         body {
-                
             font-family: Arial, sans-serif;
         }
 
@@ -20,42 +19,48 @@
             margin-top: 100px;
         }
 
-        .login-container input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
+            .login-container input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+            }
 
-        .login-container button {
-            width: 100%;
-                    padding: 10px;
-                    background-color: #4caf50;
-                    color: white;
-                    border: none;
-                    cursor: pointer;
-                }
-        </style>
-    </head>
-    <body>
+            .login-container button {
+                width: 100%;
+                padding: 10px;
+                background-color: #4caf50;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
 
-        <div class="login-container">
+    <div class="login-container">
 
-            <h2>Login</h2>
-            <form method="post">
-                <input type="text" name="Email" placeholder="Email" required />
-                <input type="password" name="Password" placeholder="Password" required />
-                <button type="submit">Login</button>
-                <p>
-                    <a  asp-action="Register">Register as a new user</a>
-                </p>
-                <p>
-                    <a id="forgot-password" asp-page="">Forgot your password?</a>
-                </p>
-               
-            </form>
-        </div>
-    </body>
-    </html>
+        <h2>Login</h2>
+        <form method="post">
+            <input type="text" name="Email" placeholder="Email" required asp-for="Email" />
+            <input type="password" name="Password" placeholder="Password" required asp-for="Password" />
+            @if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+            {
+                <div class="alert alert-danger">
+                    <p>@ViewBag.ErrorMessage</p>
+                </div>
+            }
+            <button type="submit">Login</button>
+            <p>
+                <a asp-action="Register">Register as a new user</a>
+            </p>
+            <p>
+                <a id="forgot-password" asp-page="">Forgot your password?</a>
+            </p>
+
+        </form>
+    </div>
+</body>
+</html>
 
 
 
