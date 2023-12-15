@@ -1,12 +1,6 @@
-﻿//using System.ComponentModel.DataAnnotations;
-
-//namespace zodiac.Models
-// UserModel.cs
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace zodiac.Models;
-
-
+namespace Database.Models;
 public class UserModel
 {
     [Key]

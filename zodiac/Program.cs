@@ -1,6 +1,7 @@
+using Database.Models;
+using Database.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using zodiac.Migration;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ZodiacContext>(options =>
@@ -41,5 +42,19 @@ app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var context = services.GetRequiredService<ZodiacContext>();
+    context.Database.Migrate();
+    Seed.SeedZodiacs(context);
+}
+catch (Exception ex)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred during migration");
+}
 
 app.Run();

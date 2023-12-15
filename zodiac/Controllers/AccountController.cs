@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using zodiac.Migration;
-using zodiac.Models;
+﻿using Database.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace zodiac.Controllers
 {
@@ -61,6 +60,7 @@ namespace zodiac.Controllers
                     HttpContext.Session.SetInt32("UserId", user.Id);
                     HttpContext.Session.SetString("Email", user.Email);
                     HttpContext.Session.SetString("Username", user.Username);
+                    return RedirectToAction("","Home");
                 }
                 else
                 {
