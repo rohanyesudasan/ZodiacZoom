@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Database.Models.ZodiacVM
 @{
+    ViewBag.Title = "Find Your Zodiac";
 }
+<div class="container">
+
+    <h2>Login</h2>
+    <form method="post">
+        <input type="date" name="BirthDate" placeholder="BirthDate" required asp-for="BirthDate" />
+        @if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+        {
+            <div class="alert alert-danger">
+                <p>@ViewBag.ErrorMessage</p>
+            </div>
+        }
+        <button type="submit">Find My Zodiac Sign</button>
+
+        @if (Model != null && Model.ZodiacSign?.Length > 0)
+        {
+            <p>Congratulations! Your Zodiac sign is @Model.ZodiacSign</p>
+        }
+
+
+        @*         <p>
+        <a asp-action="Register">Register as a new user</a>
+        </p>
+        <p>
+        <a id="forgot-password" asp-page="">Forgot your password?</a>
+        </p> *@
+    </form>
+</div>
