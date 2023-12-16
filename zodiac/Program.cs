@@ -50,6 +50,7 @@ try
     var context = services.GetRequiredService<ZodiacContext>();
     context.Database.Migrate();
     Seed.SeedZodiacs(context);
+    Seed.SeedCompatibleZodiacs(context);
 }
 catch (Exception ex)
 {

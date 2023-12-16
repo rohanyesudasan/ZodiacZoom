@@ -4,6 +4,7 @@ using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(ZodiacContext))]
-    partial class ZodiacContextModelSnapshot : ModelSnapshot
+    [Migration("20231216005838_CompatibleZodiacsNullable")]
+    partial class CompatibleZodiacsNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,6 +42,8 @@ namespace Database.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CompatibleZodiacId");
+
+                    b.HasIndex("ZodiacId");
 
                     b.ToTable("CompatibleZodiacs");
                 });
@@ -101,10 +106,15 @@ namespace Database.Migrations
                 {
                     b.HasOne("Database.Models.Zodiac", "CompatibleZodiac")
                         .WithMany()
-                        .HasForeignKey("CompatibleZodiacId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("CompatibleZodiacId");
+
+                    b.HasOne("Database.Models.Zodiac", "Zodiac")
+                        .WithMany()
+                        .HasForeignKey("ZodiacId");
 
                     b.Navigation("CompatibleZodiac");
+
+                    b.Navigation("Zodiac");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,6 +4,7 @@ using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(ZodiacContext))]
-    partial class ZodiacContextModelSnapshot : ModelSnapshot
+    [Migration("20231216010231_CompatibleZodiacsNullable1")]
+    partial class CompatibleZodiacsNullable1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,8 +104,7 @@ namespace Database.Migrations
                 {
                     b.HasOne("Database.Models.Zodiac", "CompatibleZodiac")
                         .WithMany()
-                        .HasForeignKey("CompatibleZodiacId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("CompatibleZodiacId");
 
                     b.Navigation("CompatibleZodiac");
                 });

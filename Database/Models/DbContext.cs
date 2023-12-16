@@ -15,6 +15,7 @@ namespace Database.Models
 
         public DbSet<UserModel> Users { get; set; }
         public DbSet<Zodiac> Zodiacs { get; set; }
+        public DbSet<CompatibleZodiacs> CompatibleZodiacs { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserModel>().HasIndex(user => user.Email).IsUnique();

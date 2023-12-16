@@ -82,5 +82,106 @@ namespace Database.Seed
             context.Zodiacs.AddRange(zodiacs);
             context.SaveChanges();
         }
+        public static void SeedCompatibleZodiacs(ZodiacContext context)
+        {
+            if (context.CompatibleZodiacs.Any())
+                return;
+
+            var compatibleZodiacs = new List<CompatibleZodiacs>
+            {
+                new CompatibleZodiacs
+                {
+                    ZodiacId = 1,
+                    CompatibleZodiacId = 3
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 1,
+                    CompatibleZodiacId = 11
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 2,
+                    CompatibleZodiacId = 4
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 2,
+                    CompatibleZodiacId = 12
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 3,
+                    CompatibleZodiacId = 1
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 3,
+                    CompatibleZodiacId = 5
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 5,
+                    CompatibleZodiacId = 3
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 5,
+                    CompatibleZodiacId = 7
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 6,
+                    CompatibleZodiacId = 4
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 6,
+                    CompatibleZodiacId = 8
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 7,
+                    CompatibleZodiacId = 5
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 7,
+                    CompatibleZodiacId = 9
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 8,
+                    CompatibleZodiacId = 6
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 8,
+                    CompatibleZodiacId = 10
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 9,
+                    CompatibleZodiacId = 7
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 9,
+                    CompatibleZodiacId = 11
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 10,
+                    CompatibleZodiacId = 8
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 10,
+                    CompatibleZodiacId = 12
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 11,
+                    CompatibleZodiacId = 2
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 11,
+                    CompatibleZodiacId = 9
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 12,
+                    CompatibleZodiacId = 2
+                },new CompatibleZodiacs
+                {
+                    ZodiacId = 12,
+                    CompatibleZodiacId = 10
+                },
+            };
+
+            context.CompatibleZodiacs.AddRange(compatibleZodiacs);
+            context.SaveChanges();
+        }
     }
 }

@@ -4,6 +4,7 @@ using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Database.Migrations
 {
     [DbContext(typeof(ZodiacContext))]
-    partial class ZodiacContextModelSnapshot : ModelSnapshot
+    [Migration("20231215234925_CompatibleZodiacs")]
+    partial class CompatibleZodiacs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,15 +33,17 @@ namespace Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CompatibleZodiacId")
+                    b.Property<int>("CompatibleZodiacId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ZodiacId")
+                    b.Property<int>("ZodiacId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompatibleZodiacId");
+
+                    b.HasIndex("ZodiacId");
 
                     b.ToTable("CompatibleZodiacs");
                 });
@@ -102,9 +107,18 @@ namespace Database.Migrations
                     b.HasOne("Database.Models.Zodiac", "CompatibleZodiac")
                         .WithMany()
                         .HasForeignKey("CompatibleZodiacId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Database.Models.Zodiac", "Zodiac")
+                        .WithMany()
+                        .HasForeignKey("ZodiacId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CompatibleZodiac");
+
+                    b.Navigation("Zodiac");
                 });
 #pragma warning restore 612, 618
         }
